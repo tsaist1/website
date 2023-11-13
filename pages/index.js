@@ -4,34 +4,6 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import useSWR from "swr";
 
-// SWR -- React hook for client side data fetching
-function Profile() {
-	const { data, error } = useSWR("/api/user", fetch);
-
-	if (error) return <div>failed to load</div>;
-	if (!data) return <div>loading...</div>;
-	return <div>hello {data.name}!</div>;
-}
-
-export async function getStaticProps() {
-	const allPostsData = getSortedPostsData();
-	return {
-		props: {
-			allPostsData,
-		},
-	};
-}
-
-// server side rendering
-// TODO: not yet implemented
-export async function getServerSideProps(context) {
-	return {
-		props: {
-			// props for your component
-		},
-	};
-}
-
 export default function Home({ allPostsData }) {
 	return (
 		<Layout home>
@@ -63,4 +35,31 @@ export default function Home({ allPostsData }) {
 			</section>
 		</Layout>
 	);
+}
+
+export async function getStaticProps() {
+	const allPostsData = getSortedPostsData();
+	return {
+		props: {
+			allPostsData,
+		},
+	};
+}
+
+// server side rendering
+// export async function getServerSideProps(context) {
+// 	return {
+// 		props: {
+// 			// props for your component
+// 		},
+// 	};
+// }
+
+// SWR -- React hook for client side data fetching
+function Profile() {
+	const { data, error } = useSWR("/api/user", fetch);
+
+	if (error) return <div>failed to load</div>;
+	if (!data) return <div>loading...</div>;
+	return <div>hello {data.name}!</div>;
 }
