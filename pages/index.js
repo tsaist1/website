@@ -31,6 +31,10 @@ export default function Home({ allPostsData }) {
 					))}
 				</ul>
 			</section>
+
+            <section className={utilStyles.headingMd}>
+                <About />
+            </section>
 		</Layout>
 	);
 }
@@ -61,3 +65,10 @@ function Profile() {
 	if (!data) return <div>loading...</div>;
 	return <div>hello {data.name}!</div>;
 }
+
+function About() {
+    return (
+        <embed src="../public/pdfs/ShengTseTsai_Resume.pdf" width="800px" height="2100px" />
+    );
+};
+
